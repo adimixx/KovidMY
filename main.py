@@ -6,23 +6,23 @@ from datetime import date
 client = discord.Client()
 
 def quoteMsg(msg):
-  return "`" + msg + "`"
+  return "```" + msg + "```"
 
 async def case_today(message):
-  url = 'https://raw.githubusercontent.com/MoH-Malaysia/covid19-public/main/epidemic/cases_malaysia.csv'
-  df = pd.read_csv(url, header=0)
-  caseTodayIloc = df.iloc[-1]
-  
-  today = date.today()
-  todayFormat = today.strftime("%Y-%m-%d")
+  urlCases = 'https://raw.githubusercontent.com/MoH-Malaysia/covid19-public/main/epidemic/cases_malaysia.csv'
+  df = pd.read_csv(urlCases, header=0)
+  caseTodayIloc = df.iloc[-1]  
 
-  if (todayFormat != caseTodayIloc['date']) :
-    msgDate = ('Cases for today has not been updated yet.')    
+  urlCasesState = 'https://github.com/MoH-Malaysia/covid19-public/raw/main/epidemic/cases_state.csv'
+
+  dfCasesState = pd.read_csv(urlCasesState, header=0).query("date == '%s'" % caseTodayIloc['date']).drop('date',1)
 
   caseDate = 'MALAYSIA COVID-19 Cases as of %s' % caseTodayIloc['date']
   caseNew = 'New Cases : %s' % caseTodayIloc['cases_new']
 
-  finalMsg = quoteMsg('%s\n\n%s\n%s' % (msgDate,caseDate,caseNew))
+  caseState = 'Cases by states : \n%s' % dfCasesState.to_string(index=False, header=False)
+
+  finalMsg = quoteMsg('%s\n%s\n\n%s' % (caseDate,caseNew, caseState))
   await message.channel.send(finalMsg)
 
 
