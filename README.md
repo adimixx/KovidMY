@@ -1,5 +1,5 @@
 <br/>
-<p align="center"><img src="resource/img/banner.jpg" width="400"></p>
+<p align="center"><img src="resource/img/banner.jpg"></p>
 <br/>
 
 ## Kovid-MY
