@@ -1,3 +1,7 @@
+<br/>
+<p align="center"><img src="resource/img/banner.jpg" width="400"></p>
+<br/>
+
 ## Kovid-MY
 
 Kovid-MY is a Discord Bot that reports Malaysia COVID-19 Stats from data provided by MoH Malaysia
